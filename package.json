@@ -1,8 +1,9 @@
 {
   "name": "@qweme32/cryptomus",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Node wrapper for cryptomus api",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "start": "node lib/index.js",
     "build": "tsc",

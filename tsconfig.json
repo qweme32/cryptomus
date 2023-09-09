@@ -4,6 +4,7 @@
     "target": "esnext",
     "allowJs": true,
     "outDir": "lib",
+    "declaration": true,
   },
   "include": [
     "src/*.ts"
