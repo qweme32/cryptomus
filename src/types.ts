@@ -88,3 +88,34 @@ export interface I_CREATE_PAYMENT_RESPONSE {
         updated_at: string;
     }
 }
+
+export interface I_CREATE_STATIC_WALLET_REQUEST {
+    currency: string;
+    order_id: string;
+    network: string;
+    url_callback?: string;
+    from_referral_code?: string;
+}
+
+export interface I_CREATE_STATIC_WALLET_RESPONSE {
+    state: number;
+    result: {
+        wallet_uuid: string;
+        uuid: string;
+        address: string;
+        currency: string;
+        network: string;
+        url: string;
+    }
+}
+
+export interface I_GEN_QR_REQUEST {
+    wallet_address_uuid: string;
+}
+
+export interface I_GEN_QR_RESPONSE {
+    state: number;
+    result: {
+        image: string;
+    }
+}

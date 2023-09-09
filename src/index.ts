@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { E_HTTP, E_TOKEN, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE } from './types';
+import { E_HTTP, E_TOKEN, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE, I_CREATE_STATIC_WALLET_REQUEST, I_CREATE_STATIC_WALLET_RESPONSE, I_GEN_QR_REQUEST, I_GEN_QR_RESPONSE } from './types';
 import { CryptomusError } from './errors';
 import axios, { AxiosError } from 'axios';
 
@@ -47,6 +47,26 @@ export class Cryptomus {
      */
     async createPayment( options: I_CREATE_PAYMENT_REQUEST ): Promise<I_CREATE_PAYMENT_RESPONSE> {
         return await this.request<I_CREATE_PAYMENT_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/payment", options );
+    }
+
+    /**
+     * Creates a static wallet.
+     *
+     * @param {I_CREATE_STATIC_WALLET_REQUEST} options - The options for creating the static wallet.
+     * @return {Promise<I_CREATE_STATIC_WALLET_RESPONSE>} A promise that resolves with the response of creating the static wallet.
+     */
+    async createStaticWallet( options: I_CREATE_STATIC_WALLET_REQUEST ): Promise<I_CREATE_STATIC_WALLET_RESPONSE> {
+        return await this.request<I_CREATE_STATIC_WALLET_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/wallet", options );
+    }
+
+    /**
+     * Generates a QR code based on the provided options.
+     *
+     * @param {I_GEN_QR_REQUEST} options - The options for generating the QR code.
+     * @return {Promise<I_GEN_QR_RESPONSE>} - A promise that resolves to the generated QR code response.
+     */
+    async genQr( options: I_GEN_QR_REQUEST ): Promise<I_GEN_QR_RESPONSE> {
+        return await this.request<I_GEN_QR_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/wallet/qr", options );
     }
 
     /**
