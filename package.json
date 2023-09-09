@@ -1,0 +1,36 @@
+{
+  "name": "@qweme32/cryptomus",
+  "version": "0.1.0",
+  "description": "Node wrapper for cryptomus api",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node lib/index.js",
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "app": "ts-node-dev --respawn src/app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/qweme32/cryptomus.git"
+  },
+  "keywords": [
+    "cryptomus",
+    "api",
+    "crypto",
+    "payment"
+  ],
+  "author": "Qweme Dev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/qweme32/cryptomus/issues"
+  },
+  "homepage": "https://github.com/qweme32/cryptomus#readme",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.5.0"
+  }
+}
