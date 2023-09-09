@@ -57,25 +57,28 @@ export interface I_CREATE_PAYMENT_REQUEST {
     is_refresh?: boolean;
 }
 export interface I_CREATE_PAYMENT_RESPONSE {
-    uuid: string;
-    order_id: string;
-    amount: string;
-    payment_amount: string;
-    payer_amount: string;
-    discount_percent: number;
-    discount: number;
-    payer_currency: string;
-    currency: string;
-    merchant_amount: string;
-    network: string;
-    address: string;
-    from: string;
-    txid: string;
-    payment_status: E_PAYMENT_STATUS;
-    url: string;
-    expired_at: string;
-    is_final: boolean;
-    additional_data: string;
-    created_at: string;
-    updated_at: string;
+    state: number;
+    result: {
+        uuid: string;
+        order_id: string;
+        amount: string;
+        payment_amount: string;
+        payer_amount: string;
+        discount_percent: number;
+        discount: number;
+        payer_currency: string;
+        currency: string;
+        merchant_amount: string;
+        network: string;
+        address: string;
+        from: string;
+        txid: string;
+        payment_status: E_PAYMENT_STATUS;
+        url: string;
+        expired_at: string;
+        is_final: boolean;
+        additional_data: string;
+        created_at: string;
+        updated_at: string;
+    };
 }
