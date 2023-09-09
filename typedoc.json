@@ -1,0 +1,7 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "plugin": ["@mxssfd/typedoc-theme"],
+    "disableSources": true,
+    "theme": "my-theme",
+    "entryPoints": ["src/*.ts"]
+}
