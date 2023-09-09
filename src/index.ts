@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { E_HTTP, E_TOKEN, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE, I_CREATE_STATIC_WALLET_REQUEST, I_CREATE_STATIC_WALLET_RESPONSE, I_GEN_QR_REQUEST, I_GEN_QR_RESPONSE } from './types';
+import { E_HTTP, E_TOKEN, I_BLOCK_STATIC_WALLET_REQUEST, I_BLOCK_STATIC_WALLET_RESPONSE, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE, I_CREATE_STATIC_WALLET_REQUEST, I_CREATE_STATIC_WALLET_RESPONSE, I_GEN_QR_REQUEST, I_GEN_QR_RESPONSE, I_PAYMENT_INFO_REQUEST, I_PAYMENT_INFO_RESPONSE, I_REFUND_FROM_BLOCK_WALLET_REQUEST, I_REFUND_FROM_BLOCK_WALLET_RESPONSE } from './types';
 import { CryptomusError } from './errors';
 import axios, { AxiosError } from 'axios';
 
@@ -67,6 +67,36 @@ export class Cryptomus {
      */
     async genQr( options: I_GEN_QR_REQUEST ): Promise<I_GEN_QR_RESPONSE> {
         return await this.request<I_GEN_QR_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/wallet/qr", options );
+    }
+
+    /**
+     * Blocks a static wallet.
+     *
+     * @param {I_BLOCK_STATIC_WALLER_REQUEST} options - The options for blocking the wallet.
+     * @return {Promise<I_BLOCK_STATIC_WALLER_RESPONSE>} - A promise that resolves to the response of the blocking operation.
+     */
+    async blockStaticWallet( options: I_BLOCK_STATIC_WALLET_REQUEST ): Promise<I_BLOCK_STATIC_WALLET_RESPONSE> {
+        return await this.request<I_BLOCK_STATIC_WALLET_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/wallet/block-address", options );
+    }
+
+    /**
+     * Refunds from a blocked wallet.
+     *
+     * @param {I_REFUND_FROM_BLOCK_WALLET_REQUEST} options - The options for the refund request.
+     * @return {Promise<I_REFUND_FROM_BLOCK_WALLET_RESPONSE>} - A promise that resolves to the refund response.
+     */
+    async refundFromBlockedWallet( options: I_REFUND_FROM_BLOCK_WALLET_REQUEST ): Promise<I_REFUND_FROM_BLOCK_WALLET_RESPONSE> {
+        return await this.request<I_REFUND_FROM_BLOCK_WALLET_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/wallet/blocked-address-refund", options );
+    }
+
+    /**
+     * Retrieves the payment information based on the provided options.
+     *
+     * @param {I_PAYMENT_INFO_REQUEST} options - The payment information request options.
+     * @return {Promise<I_PAYMENT_INFO_RESPONSE>} The payment information response.
+     */
+    async getPayment( options: I_PAYMENT_INFO_REQUEST ): Promise<I_PAYMENT_INFO_RESPONSE> {
+        return await this.request<I_PAYMENT_INFO_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/payment/info", options );
     }
 
     /**

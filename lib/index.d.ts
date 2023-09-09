@@ -1,4 +1,4 @@
-import { E_HTTP, E_TOKEN, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE, I_CREATE_STATIC_WALLET_REQUEST, I_CREATE_STATIC_WALLET_RESPONSE, I_GEN_QR_REQUEST, I_GEN_QR_RESPONSE } from './types';
+import { E_HTTP, E_TOKEN, I_BLOCK_STATIC_WALLET_REQUEST, I_BLOCK_STATIC_WALLET_RESPONSE, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE, I_CREATE_STATIC_WALLET_REQUEST, I_CREATE_STATIC_WALLET_RESPONSE, I_GEN_QR_REQUEST, I_GEN_QR_RESPONSE, I_PAYMENT_INFO_REQUEST, I_PAYMENT_INFO_RESPONSE, I_REFUND_FROM_BLOCK_WALLET_REQUEST, I_REFUND_FROM_BLOCK_WALLET_RESPONSE } from './types';
 export declare class Cryptomus {
     private readonly merchant;
     private readonly paymentToken;
@@ -35,6 +35,27 @@ export declare class Cryptomus {
      * @return {Promise<I_GEN_QR_RESPONSE>} - A promise that resolves to the generated QR code response.
      */
     genQr(options: I_GEN_QR_REQUEST): Promise<I_GEN_QR_RESPONSE>;
+    /**
+     * Blocks a static wallet.
+     *
+     * @param {I_BLOCK_STATIC_WALLER_REQUEST} options - The options for blocking the wallet.
+     * @return {Promise<I_BLOCK_STATIC_WALLER_RESPONSE>} - A promise that resolves to the response of the blocking operation.
+     */
+    blockStaticWallet(options: I_BLOCK_STATIC_WALLET_REQUEST): Promise<I_BLOCK_STATIC_WALLET_RESPONSE>;
+    /**
+     * Refunds from a blocked wallet.
+     *
+     * @param {I_REFUND_FROM_BLOCK_WALLET_REQUEST} options - The options for the refund request.
+     * @return {Promise<I_REFUND_FROM_BLOCK_WALLET_RESPONSE>} - A promise that resolves to the refund response.
+     */
+    refundFromBlockedWallet(options: I_REFUND_FROM_BLOCK_WALLET_REQUEST): Promise<I_REFUND_FROM_BLOCK_WALLET_RESPONSE>;
+    /**
+     * Retrieves the payment information based on the provided options.
+     *
+     * @param {I_PAYMENT_INFO_REQUEST} options - The payment information request options.
+     * @return {Promise<I_PAYMENT_INFO_RESPONSE>} The payment information response.
+     */
+    getPayment(options: I_PAYMENT_INFO_REQUEST): Promise<I_PAYMENT_INFO_RESPONSE>;
     /**
      * Generates a signature for the given data and key.
      *

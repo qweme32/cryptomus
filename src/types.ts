@@ -62,31 +62,33 @@ export interface I_CREATE_PAYMENT_REQUEST {
     is_refresh?: boolean;
 }
 
+export interface I_PAYMENT {
+    uuid: string;
+    order_id: string;
+    amount: string;
+    payment_amount: string;
+    payer_amount: string;
+    discount_percent: number;
+    discount: number;
+    payer_currency: string;
+    currency: string;
+    merchant_amount: string;
+    network: string;
+    address: string;
+    from: string;
+    txid: string;
+    payment_status: E_PAYMENT_STATUS;
+    url: string;
+    expired_at: string;
+    is_final: boolean;
+    additional_data: string;
+    created_at: string;
+    updated_at: string;
+}
+
 export interface I_CREATE_PAYMENT_RESPONSE {
     state: number;
-    result: {
-        uuid: string;
-        order_id: string;
-        amount: string;
-        payment_amount: string;
-        payer_amount: string;
-        discount_percent: number;
-        discount: number;
-        payer_currency: string;
-        currency: string;
-        merchant_amount: string;
-        network: string;
-        address: string;
-        from: string;
-        txid: string;
-        payment_status: E_PAYMENT_STATUS;
-        url: string;
-        expired_at: string;
-        is_final: boolean;
-        additional_data: string;
-        created_at: string;
-        updated_at: string;
-    }
+    result: I_PAYMENT
 }
 
 export interface I_CREATE_STATIC_WALLET_REQUEST {
@@ -118,4 +120,48 @@ export interface I_GEN_QR_RESPONSE {
     result: {
         image: string;
     }
+}
+
+export interface I_BLOCK_STATIC_WALLET_REQUEST {
+    uuid?: string;
+    order_id?: string;
+    is_force_refund?: boolean;
+}
+
+export enum E_STATIC_WALLET_STATUS {
+    BLOCKED = 'blocked',
+    ACTIVE = 'active',
+    IN_ACTIVE = 'in_active',
+}
+
+export interface I_BLOCK_STATIC_WALLET_RESPONSE {
+    state: number;
+    result: {
+        uuid: string;
+        status: E_STATIC_WALLET_STATUS;
+    }
+}
+
+export interface I_REFUND_FROM_BLOCK_WALLET_REQUEST {
+    uuid?: string;
+    order_id?: string;
+    address: string;
+}
+
+export interface I_REFUND_FROM_BLOCK_WALLET_RESPONSE {
+    state: number;
+    result: {
+        commission: string;
+        amount: string;
+    }
+}
+
+export interface I_PAYMENT_INFO_REQUEST {
+    uuid?: string;
+    order_id: string;
+}
+
+export interface I_PAYMENT_INFO_RESPONSE {
+    state: number;
+    result: I_PAYMENT;
 }
