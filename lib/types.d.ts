@@ -147,3 +147,33 @@ export interface I_PAYMENT_INFO_RESPONSE {
     state: number;
     result: I_PAYMENT;
 }
+export interface I_PAYMENT_REFUND_REQUEST {
+    address: string;
+    is_subtract: boolean;
+    uuid?: string;
+    order_id?: string;
+}
+export interface I_PAYMENT_REFUND_RESPONSE {
+    state: number;
+    result: [];
+}
+export interface I_RESEND_WEBHOOK_REQUEST {
+    uuid?: string;
+    order_id?: string;
+}
+export interface I_RESEND_WEBHOOK_RESPONSE {
+    state: number;
+    result: [];
+}
+export interface I_TEST_WEBHOOK_REQUEST {
+    url_callback: string;
+    currency: string;
+    network: string;
+    uuid?: string;
+    order_id?: string;
+    status: E_PAYMENT_STATUS;
+}
+export interface I_TEST_WEBHOOK_RESPONSE {
+    state: number;
+    result: [];
+}

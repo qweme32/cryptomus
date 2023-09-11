@@ -3,5 +3,6 @@
     "plugin": ["@mxssfd/typedoc-theme"],
     "disableSources": true,
     "theme": "my-theme",
-    "entryPoints": ["src/*.ts"]
+    "entryPoints": ["src/*.ts"],
+    "exclude": ["node_modules", "src/*.test.ts"],
 }

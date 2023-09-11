@@ -1,5 +1,5 @@
 import { createHash } from 'crypto';
-import { E_HTTP, E_TOKEN, I_BLOCK_STATIC_WALLET_REQUEST, I_BLOCK_STATIC_WALLET_RESPONSE, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE, I_CREATE_STATIC_WALLET_REQUEST, I_CREATE_STATIC_WALLET_RESPONSE, I_GEN_QR_REQUEST, I_GEN_QR_RESPONSE, I_PAYMENT_INFO_REQUEST, I_PAYMENT_INFO_RESPONSE, I_REFUND_FROM_BLOCK_WALLET_REQUEST, I_REFUND_FROM_BLOCK_WALLET_RESPONSE } from './types';
+import { E_HTTP, E_TOKEN, I_BLOCK_STATIC_WALLET_REQUEST, I_BLOCK_STATIC_WALLET_RESPONSE, I_CREATE_PAYMENT_REQUEST, I_CREATE_PAYMENT_RESPONSE, I_CREATE_STATIC_WALLET_REQUEST, I_CREATE_STATIC_WALLET_RESPONSE, I_GEN_QR_REQUEST, I_GEN_QR_RESPONSE, I_PAYMENT_INFO_REQUEST, I_PAYMENT_INFO_RESPONSE, I_PAYMENT_REFUND_REQUEST, I_PAYMENT_REFUND_RESPONSE, I_REFUND_FROM_BLOCK_WALLET_REQUEST, I_REFUND_FROM_BLOCK_WALLET_RESPONSE, I_RESEND_WEBHOOK_REQUEST, I_RESEND_WEBHOOK_RESPONSE, I_TEST_WEBHOOK_REQUEST, I_TEST_WEBHOOK_RESPONSE } from './types';
 import { CryptomusError } from './errors';
 import axios, { AxiosError } from 'axios';
 
@@ -97,6 +97,46 @@ export class Cryptomus {
      */
     async getPayment( options: I_PAYMENT_INFO_REQUEST ): Promise<I_PAYMENT_INFO_RESPONSE> {
         return await this.request<I_PAYMENT_INFO_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/payment/info", options );
+    }
+
+    /**
+     * Refunds a payment.
+     *
+     * @param {I_PAYMENT_REFUND_REQUEST} options - The options for refunding the payment.
+     * @return {Promise<I_PAYMENT_REFUND_RESPONSE>} The response containing the refund details.
+     */
+    async refundPayment( options: I_PAYMENT_REFUND_REQUEST ): Promise<I_PAYMENT_REFUND_RESPONSE> {
+        return await this.request<I_PAYMENT_REFUND_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/payment/refund", options );
+    }
+
+    /**
+     * Asynchronously resends a webhook.
+     *
+     * @param {I_RESEND_WEBHOOK_REQUEST} options - The options for resending the webhook.
+     * @return {Promise<I_RESEND_WEBHOOK_RESPONSE>} - The response from the resend request.
+     */
+    async resendWebhook( options: I_RESEND_WEBHOOK_REQUEST ): Promise<I_RESEND_WEBHOOK_RESPONSE> {
+        return await this.request<I_RESEND_WEBHOOK_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/payment/resend", options );
+    }
+
+    /**
+     * Sends a test webhook request and returns the response.
+     *
+     * @param {I_TEST_WEBHOOK_REQUEST} options - The options for the test webhook request.
+     * @return {Promise<I_TEST_WEBHOOK_RESPONSE>} - A promise that resolves to the response of the test webhook request.
+     */
+    async testPaymentWebhook( options: I_TEST_WEBHOOK_REQUEST ): Promise<I_TEST_WEBHOOK_RESPONSE> {
+        return await this.request<I_TEST_WEBHOOK_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/test-webhook/payment", options );
+    }
+
+    /**
+     * Sends a test payout webhook request and returns the response.
+     *
+     * @param {I_TEST_WEBHOOK_REQUEST} options - The options for the test webhook request.
+     * @return {Promise<I_TEST_WEBHOOK_RESPONSE>} - The response from the test webhook request.
+     */
+    async testPayoutWebhook( options: I_TEST_WEBHOOK_REQUEST ): Promise<I_TEST_WEBHOOK_RESPONSE> {
+        return await this.request<I_TEST_WEBHOOK_RESPONSE>( E_HTTP.POST, E_TOKEN.PAYMENT, "v1/test-webhook/payout", options );
     }
 
     /**
